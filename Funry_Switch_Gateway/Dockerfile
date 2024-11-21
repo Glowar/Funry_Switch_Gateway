@@ -2,7 +2,10 @@
 ARG BUILD_FROM
 FROM $BUILD_FROM
 
-ENV PYTHONUNBUFFERED=1
+# Install requirements for add-on
+RUN \
+  apk add --no-cache \
+    python3
 
 COPY rootfs /
 RUN chmod a+x /src/main.py
