@@ -5,8 +5,9 @@ FROM $BUILD_FROM
 ENV PYTHONUNBUFFERED=1
 
 COPY rootfs /
-RUN chmod a+x /src/*
-RUN chmod a+x /etc/*
+RUN chmod a+x /src/main.py
+RUN chmod a+x /etc/services.d/funry_switch_gateway/run
+RUN chmod a+x /etc/services.d/funry_switch_gateway/finish
 
 WORKDIR /src
 
