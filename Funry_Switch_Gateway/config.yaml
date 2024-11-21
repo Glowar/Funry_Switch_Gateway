@@ -11,6 +11,7 @@ arch:
   - i386
 init: false
 uart: true
+host_network: true
 startup: services
 #image: "ghcr.io/glowar/{arch}-rehau_neasmart2_gateway"
 ports:
