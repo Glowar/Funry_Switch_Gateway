@@ -1,0 +1,25 @@
+name: Funry Switch Gateway Gateway
+version: "0.0.1"
+slug: funry_switch_gateway
+description: Funry Switch Gateway Home Assistant Add-On
+url: "https://github.com/glowar/Funry_Switch_Gateway/blob/main/Funry_Switch_Gateway"
+arch:
+  - armv7
+  - armhf
+  - aarch64
+  - amd64
+  - i386
+init: false
+uart: true
+startup: services
+#image: "ghcr.io/glowar/{arch}-rehau_neasmart2_gateway"
+ports:
+  10502/tcp: 10502
+options:
+  listen_address: "127.0.0.1"
+  listen_port: "10502"
+  server_type: "tcp"
+schema:
+  listen_address: "str?"
+  listen_port: "str?"
+  server_type: "str?"
