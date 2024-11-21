@@ -17,7 +17,7 @@ startup: services
 ports:
   10502/tcp: 10502
 options:
-  listen_address: "127.0.0.1"
+  listen_address: "192.168.1.121"
   listen_port: "10502"
   server_type: "tcp"
 schema:
