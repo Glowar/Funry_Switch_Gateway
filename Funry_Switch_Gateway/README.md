@@ -1,6 +1,6 @@
-# Home Assistant Add-on: Rehau Neasmart 2.0 Gateway 
+# Home Assistant Add-on: Funry Switch Gateway
 
-_Shim between Modbus and REST for interfacing homeassistant with Rehau Neasmart 2.0 climate control system._
+
 
 ![Supports aarch64 Architecture][aarch64-shield]
 ![Supports amd64 Architecture][amd64-shield]
