@@ -4,6 +4,7 @@ FROM $BUILD_FROM
 
 # Install requirements for add-on
 RUN \
+  --network host \
   apk add --no-cache \
     python3
 
