@@ -36,10 +36,10 @@ class OutputProtocol(asyncio.Protocol):
         self.transport.resume_reading()   
         
              
-async def serial_funry():
+async def serial_funry(addr):
     print('SERIAL: Start ...') 
     loop = asyncio.get_event_loop()
-    coro = serial_asyncio.create_serial_connection(loop, OutputProtocol, config.port_name, baudrate=config.baud_rate)
+    coro = serial_asyncio.create_serial_connection(loop, OutputProtocol, addr, baudrate=config.baud_rate)
     transport, protocol = loop.run_until_complete(coro)
     
     #for i in range (1, 255):
