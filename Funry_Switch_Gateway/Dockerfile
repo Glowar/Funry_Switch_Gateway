@@ -3,9 +3,10 @@ ARG BUILD_FROM
 FROM $BUILD_FROM
 
 # Install requirements for add-on
-RUN netbase \
+RUN 
   apk add --no-cache \
-    python3
+    python3 \
+    netbase 
 
 COPY rootfs /
 RUN chmod a+x /src/main.py
