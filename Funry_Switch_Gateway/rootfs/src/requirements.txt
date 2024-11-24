@@ -4,3 +4,4 @@
 nest-asyncio
 pyserial-asyncio
 paho-mqtt
+Netbase
