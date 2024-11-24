@@ -44,11 +44,11 @@ async def handle_client(reader, writer):
     
   
     
-async def funry_tcp():
+async def funry_tcp(addr):
     print('TCP: Start ...')
         
     server = await asyncio.start_server(
-        handle_client, config.TCP_HOST, config.TCP_PORT)
+        handle_client, addr)
     addr = server.sockets[0].getsockname()
     print(f'TCP: Serving on {addr}')
     async with server:
