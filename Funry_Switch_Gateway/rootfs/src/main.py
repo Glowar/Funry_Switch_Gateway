@@ -14,7 +14,7 @@ async def main():
     with open("/data/options.json") as f:
         conf = json.load(f)
         addr = conf.get("listen_address", "0.0.0.0")
-        port = conf.get("listen_port", "502")
+        port = conf.get("listen_port", "10502")
         server_type = conf.get("server_type", "tcp")
         
     if server_type == "tcp":
