@@ -10,7 +10,7 @@ nest_asyncio.apply()
 async def main():
     print('Start ...')    
     
-    with open(const.ADDON_OPT_PATH) as f:
+    with open("/data/options.json") as f:
         conf = json.load(f)
         addr = conf.get("listen_address", "0.0.0.0")
         port = conf.get("listen_port", "502")
