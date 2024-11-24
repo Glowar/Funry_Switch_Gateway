@@ -5,8 +5,7 @@ FROM $BUILD_FROM
 # Install requirements for add-on
 RUN 
   apk add --no-cache \
-    python3 \
-    netbase 
+    python3
 
 COPY rootfs /
 RUN chmod a+x /src/main.py
