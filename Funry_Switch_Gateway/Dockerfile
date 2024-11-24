@@ -3,8 +3,7 @@ ARG BUILD_FROM
 FROM $BUILD_FROM
 
 # Install requirements for add-on
-RUN apt-get update && apt-get install -y --no-install-recommends \
-  netbase \
+RUN netbase \
   apk add --no-cache \
     python3
 
