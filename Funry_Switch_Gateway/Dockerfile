@@ -1,7 +1,6 @@
 # https://developers.home-assistant.io/docs/add-ons/configuration#add-on-dockerfile
 ARG BUILD_FROM
 FROM $BUILD_FROM
-FROM python:latest
 
 # Install requirements for add-on
 RUN apt-get update && apt-get install -y --no-install-recommends \
