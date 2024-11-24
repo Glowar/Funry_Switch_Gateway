@@ -26,7 +26,7 @@ async def main():
         exit(1)        
         
     if server_type == "tcp":
-        task_tcp = asyncio.create_task(funry_tcp(addr))
+        task_tcp = asyncio.create_task(funry_tcp(addr, port))
     else:
         task_serial = asyncio.create_task(serial_funry(addr))
     task_mqtt = asyncio.create_task(mqtt_funry())
