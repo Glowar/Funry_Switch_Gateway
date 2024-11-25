@@ -10,6 +10,7 @@ arch:
   - amd64
   - i386
 init: false
+privileged: ["SYS_RAWIO"]
 uart: true
 host_network: true
 startup: services
