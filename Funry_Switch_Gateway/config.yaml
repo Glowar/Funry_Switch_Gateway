@@ -13,7 +13,7 @@ init: false
 #privileged: ["SYS_RAWIO"]
 #uart: true
 #host_network: true
-startup: services
+#startup: services
 #image: "ghcr.io/glowar/{arch}-rehau_neasmart2_gateway"
 ports:
   10502/tcp: 10502
