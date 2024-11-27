@@ -6,10 +6,11 @@ FROM $BUILD_FROM
 RUN \
   apk add --no-cache \
     python3
-
-RUN pip3 install -r requirements.txt
-
+    
 COPY rootfs /
 RUN chmod a+x /src/main.py
 RUN chmod a+x /etc/services.d/funry_switch_gateway/run
 RUN chmod a+x /etc/services.d/funry_switch_gateway/finish
+WORKDIR /src
+RUN pip3 install -r requirements.txt
+WORKDIR /
