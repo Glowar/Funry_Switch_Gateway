@@ -10,12 +10,10 @@ RUN \
     
 FROM python:3    
 
-RUN pip3 install -r requirements.txt
-
 COPY rootfs /
 
-# Copy data for add-on
-COPY run.sh /
+RUN pip3 install -r requirements.txt
+
 RUN chmod a+x /run.sh
 
 CMD [ "/run.sh" ]
