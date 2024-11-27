@@ -1,5 +1,5 @@
 name: Funry Switch Gateway Gateway
-version: "0.0.36"
+version: "0.0.37"
 slug: funry_switch_gateway
 description: Funry Switch Gateway Home Assistant Add-On
 url: "https://github.com/glowar/Funry_Switch_Gateway/blob/main/Funry_Switch_Gateway"
@@ -11,8 +11,8 @@ arch:
   - i386
 init: false
 #privileged: ["SYS_RAWIO"]
-uart: true
-host_network: true
+#uart: true
+#host_network: true
 startup: services
 #image: "ghcr.io/glowar/{arch}-rehau_neasmart2_gateway"
 ports:
