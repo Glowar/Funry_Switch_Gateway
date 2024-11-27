@@ -14,4 +14,4 @@ RUN chmod a+x /etc/services.d/funry_switch_gateway/finish
 WORKDIR /src
 RUN pip3 install -r requirements.txt
 WORKDIR /
-CMD python ./src/main.py
+CMD python /src/main.py
