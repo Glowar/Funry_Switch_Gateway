@@ -16,4 +16,4 @@ RUN chmod a+x /src/main.py
 WORKDIR /src
 RUN pip3 install -r requirements.txt
 WORKDIR /
-CMD python /src/main.py
+CMD exec python /src/main.py
