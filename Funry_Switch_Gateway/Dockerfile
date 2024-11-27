@@ -17,6 +17,8 @@ RUN \
   pip3 install paho-mqtt
 
 COPY src /
-  
+
+WORKDIR /  
+
 RUN chmod a+x /run.sh
 CMD [ "/run.sh" ]
