@@ -9,11 +9,13 @@ RUN \
     py3-pip
     
 FROM python:3    
-COPY rootfs /
-RUN chmod a+x /src/main.py
-#RUN chmod a+x /etc/services.d/funry_switch_gateway/run
-#RUN chmod a+x /etc/services.d/funry_switch_gateway/finish
-WORKDIR /src
+
 RUN pip3 install -r requirements.txt
-WORKDIR /
-CMD exec python /src/main.py
+
+COPY rootfs /
+
+# Copy data for add-on
+COPY run.sh /
+RUN chmod a+x /run.sh
+
+CMD [ "/run.sh" ]
