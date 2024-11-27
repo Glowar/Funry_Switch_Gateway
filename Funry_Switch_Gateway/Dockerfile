@@ -9,8 +9,8 @@ RUN \
     
 COPY rootfs /
 RUN chmod a+x /src/main.py
-RUN chmod a+x /etc/services.d/funry_switch_gateway/run
-RUN chmod a+x /etc/services.d/funry_switch_gateway/finish
+#RUN chmod a+x /etc/services.d/funry_switch_gateway/run
+#RUN chmod a+x /etc/services.d/funry_switch_gateway/finish
 WORKDIR /src
 RUN pip3 install -r requirements.txt
 WORKDIR /
