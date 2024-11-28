@@ -1,0 +1,4 @@
+asyncio
+nest-asyncio
+pyserial-asyncio
+paho-mqtt
