@@ -6,11 +6,15 @@ FROM $BUILD_FROM
 RUN \
   apk add --no-cache \
     python3
-    
-RUN pip install asyncio nest-asyncio pyserial-asyncio paho-mqtt
-  
+
 # Copy root filesystem 
 COPY rootfs /
+
+WORKDIR /src
+
+RUN pip3 install asyncio nest-asyncio pyserial-asyncio paho-mqtt
+
+WORKDIR /    
 
 RUN chmod a+x /run.sh
 
