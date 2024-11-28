@@ -2,6 +2,11 @@
 ARG BUILD_FROM
 FROM $BUILD_FROM
 
+FROM python:3
+
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir paho-mqtt
+    
 # Copy root filesystem 
 COPY src / 
 
