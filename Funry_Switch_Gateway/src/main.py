@@ -15,7 +15,7 @@ async def main():
         conf = json.load(f)
         addr = conf.get("listen_address", "0.0.0.0")
         port = conf.get("listen_port", "10502")
-        server_type = conf.get("server_type", "tcp")
+        server_type = conf.get("server_type", "TCP")
         
     if server_type != "tcp" and server_type != "serial":
         print("Unsupported server type")
