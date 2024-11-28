@@ -1,18 +1,8 @@
-ARG BUILD_FROM
-FROM $BUILD_FROM
+FROM python:3
 
 # Copy data for add-on
 COPY src /
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Install requirements for add-on
-RUN \
-  apk add --no-cache \
-    python3 \
-    bash \
-    py3-pip
-
-RUN pip3 install -r requirements.txt
-
-RUN chmod a+x /run.sh
-
-CMD [ "/run.sh" ]
+CMD ["python", "main.py"]
