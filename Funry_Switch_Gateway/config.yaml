@@ -33,6 +33,6 @@ schema:
   mqtt_address: "str?"
   mqtt_port: "int?"
   mqtt_user: "str?"
-  mqtt_password: "str?"
+  mqtt_password: "password?"
   serial_port: "device(subsystem=tty)?"
   serial_rate: "int?"
