@@ -2,15 +2,18 @@
 ARG BUILD_FROM
 FROM $BUILD_FROM
 
-# Copy root filesystem 
-COPY src / 
+# Install requirements for add-on
+RUN \
+  apk add --no-cache \
+    python3 \
+	py3-pip
 
-WORKDIR /src
-FROM python:3
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir paho-mqtt
 
-WORKDIR /
+WORKDIR ./
+
+COPY src / 
 
 RUN chmod a+x /run.sh
 
