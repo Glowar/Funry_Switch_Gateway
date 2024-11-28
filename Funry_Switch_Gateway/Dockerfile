@@ -8,11 +8,9 @@ RUN \
     bash \
     py3-pip
 
-#RUN \
-#  pip3 install asyncio && \
-#  pip3 install nest-asyncio && \
-#  pip3 install pyserial-asyncio && \
-#  pip3 install paho-mqtt
+WORKDIR /src
+
+RUN pip3 install asyncio nest-asyncio pyserial-asyncio paho-mqtt
 
 WORKDIR /data
 
