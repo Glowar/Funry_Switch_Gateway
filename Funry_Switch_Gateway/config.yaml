@@ -1,5 +1,5 @@
 name: Funry Switch Gateway
-version: "0.0.88"
+version: "0.0.89"
 slug: funry_switch_gateway
 description: Funry Switch Gateway Home Assistant Add-On
 url: "https://github.com/glowar/Funry_Switch_Gateway/blob/main/Funry_Switch_Gateway"
