@@ -20,5 +20,5 @@ WORKDIR /src
 
 COPY ./src /src/
 
-RUN chmod a+x /src/run.sh
-CMD [ "/src/run.sh" ]
+RUN chmod a+x /run.sh
+CMD [ "/run.sh" ]
