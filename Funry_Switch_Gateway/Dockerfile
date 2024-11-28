@@ -8,12 +8,13 @@ RUN \
     bash \
     py3-pip
 
-RUN \
-  pip3 install asyncio && \
-  pip3 install nest-asyncio && \
-  pip3 install pyserial-asyncio && \
-  pip3 install paho-mqtt
+#RUN \
+#  pip3 install asyncio && \
+#  pip3 install nest-asyncio && \
+#  pip3 install pyserial-asyncio && \
+#  pip3 install paho-mqtt
 
+WORKDIR /data
 
 # Copy data for add-on
 COPY src /
