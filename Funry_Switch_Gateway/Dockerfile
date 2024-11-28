@@ -5,14 +5,9 @@ FROM $BUILD_FROM
 # Install requirements for add-on
 RUN \
   apk add --no-cache \
-    python3 \
-    py3-pip
+    python3
     
-RUN \
-  pip3 install asyncio && \
-  pip3 install nest-asyncio && \
-  pip3 install pyserial-asyncio && \
-  pip3 install paho-mqtt
+RUN pip install asyncio nest-asyncio pyserial-asyncio paho-mqtt
   
 # Copy root filesystem 
 COPY rootfs /
