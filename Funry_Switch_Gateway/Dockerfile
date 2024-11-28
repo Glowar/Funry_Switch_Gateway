@@ -16,7 +16,7 @@ RUN \
   pip3 install pyserial-asyncio && \
   pip3 install paho-mqtt
 
-COPY ./src /
+COPY src /
 
-RUN chmod a+x ./run.sh
-CMD [ "./run.sh" ]
+RUN chmod a+x run.sh
+CMD [ "run.sh" ]
