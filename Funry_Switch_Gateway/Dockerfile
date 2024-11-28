@@ -2,16 +2,8 @@
 ARG BUILD_FROM
 FROM $BUILD_FROM
 
-ENV PYTHONUNBUFFERED=1
-
 # Copy root filesystem 
-COPY rootfs /
-
-WORKDIR /src
-
-RUN pip3 install asyncio nest-asyncio pyserial-asyncio paho-mqtt
-
-WORKDIR /    
+COPY src / 
 
 RUN chmod a+x /run.sh
 
