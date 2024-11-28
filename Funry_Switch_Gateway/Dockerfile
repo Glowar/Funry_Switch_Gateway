@@ -1,6 +1,9 @@
 ARG BUILD_FROM
 FROM $BUILD_FROM
 
+# Copy data for add-on
+COPY src /
+
 # Install requirements for add-on
 RUN \
   apk add --no-cache \
@@ -8,14 +11,7 @@ RUN \
     bash \
     py3-pip
 
-WORKDIR /src
-
-RUN pip3 install asyncio nest-asyncio pyserial-asyncio paho-mqtt
-
-WORKDIR /data
-
-# Copy data for add-on
-COPY src /
+RUN pip3 install -r requirements.txt
 
 RUN chmod a+x /run.sh
 
