@@ -15,21 +15,23 @@ host_network: true
 ports:
   10502/tcp: 10502
 options:
-  mode: "TCP1"
+  mode: "TCP"
+  protocol: "ModBus"
   listen_address: "0.0.0.0"
   listen_port: 10502
   mqtt_address: "192.168.1.121"
   mqtt_port: 1883
   mqtt_user: "mqtt"
-  mqtt_password: "Aa123592"
-  serial_port: "COM8"
-  serial_rate: 57600
+  mqtt_password: ""
+  serial_port: ""
+  serial_rate: 9600
 schema:
-  mode: "list(Serial|TCP1|TCP2)?"
+  mode: "list(Serial|TCP)?"
+  protocol: "list(ModBus|AA55)?"
   listen_address: "str?"
   listen_port: "int?"
   mqtt_port: "int?"
   mqtt_user: "str?"
   mqtt_password: "str?"
-  serial_port: "str?"
+  serial_port: "device(subsystem=tty)?"
   serial_rate: "int?"
