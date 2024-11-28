@@ -2,7 +2,7 @@
 
 FROM python:3
 
-COPY src /
+COPY src /src
 
 WORKDIR /etc/
 
@@ -12,7 +12,7 @@ RUN \
   pip3 install pyserial-asyncio && \
   pip3 install paho-mqtt
 
-WORKDIR /
+WORKDIR /src
 
 RUN chmod a+x /run.sh
 CMD [ "/run.sh" ]
