@@ -18,7 +18,5 @@ RUN \
 
 COPY src /
 
-WORKDIR /  
-
 RUN chmod a+x /run.sh
 CMD [ "/run.sh" ]
