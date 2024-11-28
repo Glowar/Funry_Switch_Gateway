@@ -6,10 +6,9 @@ FROM $BUILD_FROM
 RUN \
   apk add --no-cache \
     python3 \
-	py3-pip
+    py3-pip
 
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir paho-mqtt
+RUN pip3 install paho-mqtt
 
 WORKDIR ./
 
