@@ -1,10 +1,12 @@
-# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-dockerfile
+ARG BUILD_FROM
+FROM $BUILD_FROM
 
-FROM python:3
-
-COPY src /src
-
-WORKDIR /etc/
+# Install requirements for add-on
+RUN \
+  apk add --no-cache \
+    python3 \
+    bash \
+    py3-pip
 
 RUN \
   pip3 install asyncio && \
@@ -12,7 +14,10 @@ RUN \
   pip3 install pyserial-asyncio && \
   pip3 install paho-mqtt
 
-WORKDIR /src
 
-RUN chmod a+x run.sh
-CMD [ "run.sh" ]
+# Copy data for add-on
+COPY src /
+
+RUN chmod a+x /run.sh
+
+CMD [ "/run.sh" ]
