@@ -1,5 +1,5 @@
 VERSION = 0.1
-MODE = 1 # 1 = TCP; 0 = SERIAL
+MODE = 2 #2 = MODBUS_TCP; 1 = TCP; 0 = SERIAL
 
 # Serial
 from collections import deque
@@ -36,7 +36,7 @@ command_3_on = b'\xAA\x55\x01\x00\x04\x03\x01\x80\x0F\x69\x5A' # 3 ON
 command_4_on = b'\xAA\x55\x01\x00\x04\x04\x01\x80\x0F\x68\x5A' # 4 ON
 
 # TCP
-TCP_HOST = '192.168.1.121'                 # Symbolic name meaning all available interfaces
+TCP_HOST = '192.168.1.10'                 # Symbolic name meaning all available interfaces
 TCP_PORT = 10502                            # Arbitrary non-privileged port
 
 # Serial
