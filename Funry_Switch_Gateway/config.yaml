@@ -10,15 +10,12 @@ arch:
   - amd64
   - i386
 init: false
-#privileged: ["SYS_RAWIO"]
-#uart: true
 host_network: true
 #startup: services
-#image: "ghcr.io/glowar/{arch}-rehau_neasmart2_gateway"
 ports:
   10502/tcp: 10502
 options:
-  listen_address: "192.168.1.121"
+  listen_address: "0.0.0.0"
   listen_port: "10502"
   server_type: "tcp"
 schema:
