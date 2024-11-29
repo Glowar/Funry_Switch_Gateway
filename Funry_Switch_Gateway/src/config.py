@@ -1,9 +1,6 @@
-VERSION = 0.1
-MODE = 2 #2 = MODBUS_TCP; 1 = TCP; 0 = SERIAL
-
-# Serial
 from collections import deque
 
+# Protocol AA55
 #   Byte num   |      Range    |   Description        
 #       0               AA          Static
 #       1               55          Static
@@ -16,7 +13,6 @@ from collections import deque
 #       8               0F          Static
 #       9               CRC         0xFF - Byte 5,6,7,8,9.
 #       10              5A          Static
-
 
 # ALL OFF   #AA#55#01#00#04#FF#00#80#0F#6E#5A
 # ALL ON    #AA#55#01#00#04#FF#01#80#0F#6D#5A
@@ -35,21 +31,25 @@ command_2_on = b'\xAA\x55\x01\x00\x04\x02\x01\x80\x0F\x6A\x5A' # 2 ON
 command_3_on = b'\xAA\x55\x01\x00\x04\x03\x01\x80\x0F\x69\x5A' # 3 ON
 command_4_on = b'\xAA\x55\x01\x00\x04\x04\x01\x80\x0F\x68\x5A' # 4 ON
 
-# TCP
-TCP_HOST = '0.0.0.0'                 # Symbolic name meaning all available interfaces
-TCP_PORT = 10502                            # Arbitrary non-privileged port
+#
+MODE = 2 #2 = MODBUS_TCP; 1 = TCP; 0 = SERIAL
+PROTOCOL = "Modbus"
 
-# Serial
-port_name = 'COM8'  # Change this to your actual port
-baud_rate = 57600   # Change this to your desired baud rate
+# TCP
+TCP_HOST = "0.0.0.0"                 # Symbolic name meaning all available interfaces
+TCP_PORT = 10502                     # Arbitrary non-privileged port
 
 # MQTT
-BROKER  = '192.168.1.121'
-PORT  = 1883
-TOPIC  = "Funry/Switch/State"
-CLIENT_ID  = 'funry'
-USERNAME  = 'mqtt'
-PASSWORD  = 'Aa123592'
+MQTT_BROKER  = "192.168.1.121"
+MQTT_PORT  = 1883
+MQTT_TOPIC  = "Funry/Switch/State"
+MQTT_CLIENT_ID  = "funry"
+MQTT_USERNAME  = "mqtt"
+MQTT_PASSWORD  = "Aa123592"
+
+# Serial
+SERIAL_PORT = 'COM8'  # Change this to your actual port
+SERIAL_RATE = 57600   # Change this to your desired baud rate
 
 # Global
 class Key:
