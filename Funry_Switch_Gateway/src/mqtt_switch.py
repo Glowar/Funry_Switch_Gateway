@@ -46,7 +46,7 @@ def state(client, userdata, message):
     return True    
 
 def configMsg (slave, key):
-    return '{"name":"Key ' + ('{:0>3}'.format(str(key))) + '","command_topic":"'+ config.MQTT_TOPIC + '/Set","payload_on":"{ \\"Slave\\": \\"' + str(slave) + '\\", \\"Key\\": \\"' + str(key) + '\\", \\"State\\": \\"1\\" }","payload_off":"{ \\"Slave\\": \\"' + str(slave) + '\\", \\"Key\\": \\"' + str(key) + '\\", \\"State\\": \\"0\\" }","state_topic":"' + config.MQTT_TOPIC + '/Switch' + str(slave) + '/Key' + str(key) + '","state_on":"1","state_off":"0","optimistic":"true","retain":"false","unique_id":"Funry ' + ('{:0>3}'.format(str(slave))) + '{:0>3}'.format(str(key)) + '","device":{"identifiers":["Funry ' + ('{:0>3}'.format(str(slave))) + '"],"name":"Funry ' + ('{:0>3}'.format(str(slave))) + '", "manufacturer": "Funry", "model": "4"}}'
+    return '{"name":"Key ' + ('{:0>3}'.format(str(key))) + '", "command_topic":"'+ config.MQTT_TOPIC + '/Set","payload_on":"{ \\"Slave\\": \\"' + str(slave) + '\\", \\"Key\\": \\"' + str(key) + '\\", \\"State\\": \\"1\\" }","payload_off":"{ \\"Slave\\": \\"' + str(slave) + '\\", \\"Key\\": \\"' + str(key) + '\\", \\"State\\": \\"0\\" }","state_topic":"' + config.MQTT_TOPIC + '/Switch' + str(slave) + '/Key' + str(key) + '","state_on":"1","state_off":"0","optimistic":"false","retain":"false","unique_id":"Funry ' + ('{:0>3}'.format(str(slave))) + '{:0>3}'.format(str(key)) + '","device":{"identifiers":["Funry ' + ('{:0>3}'.format(str(slave))) + '"],"name":"Funry ' + ('{:0>3}'.format(str(slave))) + '", "manufacturer": "Funry", "model": "4"}}'
 
 async def mqtt_funry():
     global mqttcon
@@ -64,7 +64,7 @@ async def mqtt_funry():
 
             mqttc.message_callback_add(config.MQTT_TOPIC + "/Set", state)
             mqttc.connect(config.MQTT_BROKER, config.MQTT_PORT, 60)
-            mqttc.subscribe(config.MQTT_TOPIC + "/Set/#")
+            mqttc.subscribe(config.MQTT_TOPIC + "/Set")
             mqttc.loop_start()
             break
         except:
@@ -88,10 +88,9 @@ async def mqtt_funry():
                 if mqtt_keys[(k.slave*6)+k.key] != 1:
                     mqttc.publish('homeassistant/switch/Switch' + str(k.slave) + 'Key' + str(k.key) + '/config', configMsg(k.slave, k.key))
                     mqtt_keys[(k.slave*6)+k.key] = 1
-                    print(((k.slave*6)+k.key))
-                print(((k.slave*6)+k.key))
                 mqttc.publish(config.MQTT_TOPIC + '/Switch' + str(k.slave) +  '/Key' + str(k.key), k.state)
-                print(f"MQTT: <<--  Slave: {str(k.slave)} Key: {str(k.key)}, State: {str(k.state)}")                                                                                        
+                #mqttc.publish(config.MQTT_TOPIC + '/available', 'online')
+                print(f"MQTT: <<--  Slave: {str(k.slave)} Key: {str(k.key)}, State: {str(k.state)}")                                                                                      
         await asyncio.sleep(0.05)
         
         
