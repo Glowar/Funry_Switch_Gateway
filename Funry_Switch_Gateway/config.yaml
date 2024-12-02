@@ -1,5 +1,5 @@
 name: Funry Switch Gateway
-version: "0.0.93"
+version: "0.0.94"
 slug: funry_switch_gateway
 description: Funry Switch Gateway Home Assistant Add-On
 url: "https://github.com/glowar/Funry_Switch_Gateway/blob/main/Funry_Switch_Gateway"
@@ -28,7 +28,7 @@ options:
   serial_rate: 9600
 schema:
   mode: "list(Serial|TCP)?"
-  protocol: "list(ModBus|AA55)?"
+  protocol: "list(Modbus|AA55)?"
   listen_address: "str?"
   listen_port: "int?"
   mqtt_address: "str?"
