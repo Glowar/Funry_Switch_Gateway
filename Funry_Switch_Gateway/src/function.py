@@ -3,7 +3,7 @@ import math
 
 def rxDataProccesing(data):
     #print('Data: ', data)
-    if config.MODE == 2:
+    if config.PROTOCOL == "Modbus":
         if data[3:5] == bytes(b'\x00\x00'):
             #print('Data pref: ', data[2:5])
             Len = int(data[5])
@@ -22,7 +22,8 @@ def rxDataProccesing(data):
                                 #if int(data[10]) == 0:
                                 State = int(data[11])
                                 #print('Data State: ', State)
-                                config.qSwitch2Mqtt.append(config.Key((((Slave - 1) * 4) + Key), State))
+                                #config.qSwitch2Mqtt.append(config.Key((((Slave - 1) * 4) + Key), State))
+                                config.qSwitch2Mqtt.append(config.Key(Slave, Key, State))
                                 print('Switch: (Slave: ' + str(Slave) + ', Key: ' + str(Key) + ', State: ' + str(State) + ') -->>')
     else:
         index = data.find(b'\x5A')
@@ -39,7 +40,7 @@ def rxDataProccesing(data):
                 #print('Prefix')
                 Key = data[index-5]
                 State = data[index-4]
-                config.qSwitch2Mqtt.append(config.Key(Key, State))
+                config.qSwitch2Mqtt.append(config.Key(0, Key, State))
                 print('Switch: (Key: ' + str(Key) + ', State: ' + str(State) + ') -->>')
             
 def getcrc (commands):
@@ -54,12 +55,12 @@ def getcrc (commands):
     crc += 1        
     return crc.to_bytes()
 
-def commands (Key, State):
+def commands (Slave, Key, State):
    
     commands_array = bytearray()
-    if config.MODE == 2:
-        Slave = math.ceil(Key / 4) 
-        Key = Key - ((Slave*4)-4)
+    if config.PROTOCOL == "Modbus":
+        #Slave = math.ceil(Key / 4) 
+        #Key = Key - ((Slave*4)-4)
         commands_array.extend(b'\x00\x00\x00\x00\x00\x06')
         commands_array.append(Slave)
         commands_array.extend(b'\x06\x10')

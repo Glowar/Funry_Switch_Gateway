@@ -32,17 +32,17 @@ command_3_on = b'\xAA\x55\x01\x00\x04\x03\x01\x80\x0F\x69\x5A' # 3 ON
 command_4_on = b'\xAA\x55\x01\x00\x04\x04\x01\x80\x0F\x68\x5A' # 4 ON
 
 #
-MODE = 2 #2 = MODBUS_TCP; 1 = TCP; 0 = SERIAL
-PROTOCOL = "Modbus"
+MODE = "TCP"
+PROTOCOL = "Modbus" # "Modbus" or "AA55"
 
 # TCP
 TCP_HOST = "0.0.0.0"                 # Symbolic name meaning all available interfaces
 TCP_PORT = 10502                     # Arbitrary non-privileged port
 
 # MQTT
-MQTT_BROKER  = "192.168.1.121"
+MQTT_BROKER  = "192.168.1.116"
 MQTT_PORT  = 1883
-MQTT_TOPIC  = "Funry/Switch/State"
+MQTT_TOPIC  = "Funry"
 MQTT_CLIENT_ID  = "funry"
 MQTT_USERNAME  = "mqtt"
 MQTT_PASSWORD  = "Aa123592"
@@ -53,7 +53,8 @@ SERIAL_RATE = 57600   # Change this to your desired baud rate
 
 # Global
 class Key:
-    def __init__(self, key, state):
+    def __init__(self, slave, key, state):
+        self.slave = slave
         self.key = key
         self.state = state
         

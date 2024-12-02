@@ -1,5 +1,5 @@
 name: Funry Switch Gateway
-version: "0.0.92"
+version: "0.0.93"
 slug: funry_switch_gateway
 description: Funry Switch Gateway Home Assistant Add-On
 url: "https://github.com/glowar/Funry_Switch_Gateway/blob/main/Funry_Switch_Gateway"
@@ -15,11 +15,11 @@ host_network: true
 ports:
   10502/tcp: 10502
 options:
-  mode: "TCP"
-  protocol: "Modbus"
+  mode: "TCP" 
+  protocol: "Modbus" # "Modbus" or "AA55"
   listen_address: "0.0.0.0"
   listen_port: 10502
-  mqtt_address: "192.168.1.121"
+  mqtt_address: "192.168.1.116"
   mqtt_port: 1883
   mqtt_topic: "Funry/Switch/State"
   mqtt_user: "mqtt"

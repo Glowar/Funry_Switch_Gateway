@@ -23,7 +23,7 @@ async def handle_write(writer, addr):
         if config.qMqtt2Switch:
             try:
                 k = config.qMqtt2Switch.popleft()
-                writer.write(function.commands(k.key, k.state))
+                writer.write(function.commands(k.slave, k.key, k.state))
                 await writer.drain()
             except:
                 print(f"TCP: Client suddenly closed, cannot send")

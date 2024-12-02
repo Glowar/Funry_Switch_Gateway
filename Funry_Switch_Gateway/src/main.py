@@ -21,7 +21,7 @@ async def main():
             config.TCP_PORT = conf.get("listen_port", 10502)
             config.MQTT_BROKER = conf.get("mqtt_address", "192.168.1.121")
             config.MQTT_PORT = conf.get("mqtt_port", 1883)
-            config.MQTT_TOPIC = conf.get("mqtt_topic", "Funry/Switch/State")
+            config.MQTT_TOPIC = conf.get("mqtt_topic", "Funry")
             config.MQTT_USERNAME = conf.get("mqtt_user", "mqtt")
             config.MQTT_PASSWORD = conf.get("mqtt_password", "Aa123592")
             config.SERIAL_PORT = conf.get("serial_port", "COM8")
@@ -30,7 +30,7 @@ async def main():
     except:
          print('Couldnt open the settings file')               
         
-    if config.MODE != "TCP" and config.MODE != "SERIAL" and config.MODE != 2:
+    if config.MODE != "TCP" and config.MODE != "SERIAL":
         print("Unsupported server type")
         exit(1)    
         
