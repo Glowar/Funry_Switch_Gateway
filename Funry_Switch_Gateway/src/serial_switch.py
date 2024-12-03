@@ -77,7 +77,7 @@ async def serial_funry():
         if config.qMqtt2Switch:
             #print(config.q.popleft())
             k = config.qMqtt2Switch.popleft()
-            transport.write(function.commands(k.slave, k.key, k.state))
+            transport.write(function.commandKeyStateSet(k.slave, k.key, k.state))
             #print('Serial Write: Key: '+ str(k.key) + ' State: ' + str(k.state))
             #print(k.key)
             #print(k.state)

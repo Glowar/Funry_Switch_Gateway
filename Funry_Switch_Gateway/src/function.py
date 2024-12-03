@@ -1,13 +1,33 @@
 import config
 import math
 
+def rxResponseProccesing(Response):
+    #print('Data: ', data)
+    if config.PROTOCOL == "Modbus":
+        if Response[3:5] == bytes(b'\x00\x00'):
+            #print('Data pref: ', data[2:5])
+            Len = int(Response[5])
+            if Len > 4 and Len < 7:
+                #print('Data len: ', Len)
+                Slave = int(Response[6])
+                if Slave > 0 and Slave < 255:
+                    #print('Data Slave: ', Slave)
+                    Fun = int(Response[7])
+                    if Fun == 3:
+                        #print('Data Fun: ', Fun)
+                        LenData = int(Response[8])
+                        if LenData > 0 and LenData < 3:
+                            data = int(Response[10])
+                            print('Response from '+ str(Slave) +': ', data)
+                            return Slave, data
+        
 def rxDataProccesing(data):
     #print('Data: ', data)
     if config.PROTOCOL == "Modbus":
         if data[3:5] == bytes(b'\x00\x00'):
             #print('Data pref: ', data[2:5])
             Len = int(data[5])
-            if Len > 5 and Len < 7:
+            if Len > 4 and Len < 7:
                 #print('Data len: ', Len)
                 Slave = int(data[6])
                 if Slave > 0 and Slave < 255:
@@ -25,6 +45,7 @@ def rxDataProccesing(data):
                                 #config.qSwitch2Mqtt.append(config.Key((((Slave - 1) * 4) + Key), State))
                                 config.qSwitch2Mqtt.append(config.Key(Slave, Key, State))
                                 print('Switch: (Slave: ' + str(Slave) + ', Key: ' + str(Key) + ', State: ' + str(State) + ') -->>')
+                        
     else:
         index = data.find(b'\x5A')
         if  index > 9:
@@ -55,7 +76,7 @@ def getcrc (commands):
     crc += 1        
     return crc.to_bytes()
 
-def commands (Slave, Key, State):
+def commandKeyStateSet (Slave, Key, State):
    
     commands_array = bytearray()
     if config.PROTOCOL == "Modbus":
@@ -78,3 +99,21 @@ def commands (Slave, Key, State):
         commands_array.extend(config.command_end)
         print('Switch: (Key: ' + str(Key) + ', State: ' + str(State) + ') <<--')
     return commands_array            
+
+def commandKeyStateGet (Slave, Key):
+   
+    commands_array = bytearray()
+    if config.PROTOCOL == "Modbus":
+        #000000000006010310210001
+        commands_array.extend(b'\x00\x00\x00\x00\x00\x06')
+        commands_array.append(Slave)
+        commands_array.extend(b'\x03\x10')
+        commands_array.append(Key+32)
+        commands_array.append(0)
+        commands_array.append(1)
+        #\x21\x00\x01')
+        print('KeyStateGet: (Slave: ' + str(Slave) + ', Key: ' + str(Key) + ') <<--')
+        #print(commands_array)
+    else:        
+        commands_array.clear
+    return commands_array     

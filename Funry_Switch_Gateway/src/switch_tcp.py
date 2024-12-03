@@ -3,16 +3,40 @@ import config
 import function
 import time
 from mqtt_switch import mqtt_keys
-       
+global rxNewData
+global RxBuf
+global wait_response
+global Response
+RxBuf = bytearray()
+rxNewData = False    
+wait_response = False   
+
+async def wait_response_fun():
+    global rxNewData
+    
+    while rxNewData != True:
+        await asyncio.sleep(0.01)
+    return 1
 
 async def handle_read(reader, writer, addr):
+    global Response
+    global rxNewData
+    global RxBuf
+    global wait_response
+   
     while True:
         # Receive
         try:
             data = await reader.read(64)
             if not data:
                 break
-            function.rxDataProccesing(data)
+            #print("Data: ", data)
+            Fun = int(data[7])
+            if Fun == 6:
+                function.rxDataProccesing(data)
+            else:                
+                Response = function.rxResponseProccesing(data)
+                rxNewData = True
         except:
             print(f"TCP: Client suddenly closed while receiving from {addr}")
             break
@@ -21,6 +45,9 @@ async def handle_read(reader, writer, addr):
     print("TCP: Disconnected R by", addr)  
 
 async def handle_write(writer, addr):
+    global rxNewData
+    global RxBuf
+    global wait_response
     global mqtt_keys 
     i = 1
     n = 1
@@ -32,7 +59,7 @@ async def handle_write(writer, addr):
             try:
                 laptime  = 0
                 k = config.qMqtt2Switch.popleft()
-                writer.write(function.commands(k.slave, k.key, k.state))
+                writer.write(function.commandKeyStateSet(k.slave, k.key, k.state))
                 await writer.drain()
             except:
                 print(f"TCP: Client suddenly closed, cannot send")
@@ -44,8 +71,16 @@ async def handle_write(writer, addr):
                 lasttime = time.time()
                 try:
                     #mqtt_keys[(i*6)+n] = 0
-                    writer.write(function.commands(i, n, 1))
-                    await writer.drain()
+                    rxNewData = False
+                    writer.write(function.commandKeyStateGet(i, n))
+                    try:
+                        await asyncio.wait_for(writer.drain(),timeout=0.1)
+                        await asyncio.wait_for(wait_response_fun(), timeout=0.1)
+                        if Response[0] == i:
+                            config.qSwitch2Mqtt.append(config.Key(Response[0], n, Response[1]))
+                            print('Switch: (Slave: ' + str(Response[0]) + ', Key: ' + str(n) + ', State: ' + str(Response[1]) + ') -->>')
+                    except:
+                        print(f"TCP: No response")
                     n += 1
                     if n > 6:
                         n = 1
@@ -53,8 +88,9 @@ async def handle_write(writer, addr):
                         if i > 254:
                             i = 1
                 except:
+                    #continue
                     print(f"TCP: Client suddenly closed, cannot send")
-                    break
+        wait_response = False
         await asyncio.sleep(0.1)          
     writer.close()
     await writer.wait_closed()

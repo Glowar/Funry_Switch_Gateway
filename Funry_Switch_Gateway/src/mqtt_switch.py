@@ -46,7 +46,9 @@ def state(client, userdata, message):
     return True    
 
 def configMsg (slave, key):
-    return '{"name":"Key ' + ('{:0>3}'.format(str(key))) + '", "command_topic":"'+ config.MQTT_TOPIC + '/Set","payload_on":"{ \\"Slave\\": \\"' + str(slave) + '\\", \\"Key\\": \\"' + str(key) + '\\", \\"State\\": \\"1\\" }","payload_off":"{ \\"Slave\\": \\"' + str(slave) + '\\", \\"Key\\": \\"' + str(key) + '\\", \\"State\\": \\"0\\" }","state_topic":"' + config.MQTT_TOPIC + '/Switch' + str(slave) + '/Key' + str(key) + '","state_on":"1","state_off":"0","optimistic":"false","retain":"false","unique_id":"Funry ' + ('{:0>3}'.format(str(slave))) + '{:0>3}'.format(str(key)) + '","device":{"identifiers":["Funry ' + ('{:0>3}'.format(str(slave))) + '"],"name":"Funry ' + ('{:0>3}'.format(str(slave))) + '", "manufacturer": "Funry", "model": "4"}}'
+    
+    data = '{"name":"Key ' + ('{:0>3}'.format(str(key))) + '", "command_topic":"'+ config.MQTT_TOPIC + '/Set","payload_on":"{ \\"Slave\\": \\"' + str(slave) + '\\", \\"Key\\": \\"' + str(key) + '\\", \\"State\\": \\"1\\" }","payload_off":"{ \\"Slave\\": \\"' + str(slave) + '\\", \\"Key\\": \\"' + str(key) + '\\", \\"State\\": \\"0\\" }","state_topic":"' + config.MQTT_TOPIC + '/Switch' + str(slave) + '/Key' + str(key) + '","state_on":"1","state_off":"0","optimistic":"false","retain":"false","unique_id":"Funry ' + ('{:0>3}'.format(str(slave))) + '{:0>3}'.format(str(key)) + '","device":{"identifiers":["Funry ' + ('{:0>3}'.format(str(slave))) + '"],"name":"Funry ' + ('{:0>3}'.format(str(slave))) + '", "manufacturer": "Funry", "model": "Modbus"}}'
+    return data
 
 async def mqtt_funry():
     global mqttcon
